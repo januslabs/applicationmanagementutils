@@ -1,0 +1,5 @@
+<FindBugsFilter > 
+    <Match>
+        <Bug category="CORRECTNESS, MT_CORRECTNESS, BAD_PRACTICICE, PERFORMANCE, STYLE, SECURITY, MALICIOUS_CODE, I18N, EXPERIMENTAL"/>
+    </Match>
+</FindBugsFilter>
