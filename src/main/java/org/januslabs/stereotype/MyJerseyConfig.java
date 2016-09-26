@@ -16,11 +16,11 @@ import com.wordnik.swagger.jersey.listing.JerseyResourceListingProvider;
  * Header - X-Jersey-Tracing-Threshold , possible values are  "SUMMARY", "TRACE" & "VERBOSE"
  * X-Jersey-Tracing-Accept, possible values ON_DEMAND , ALL and OFF 
  */
-public class AEBJerseyConfig extends ResourceConfig {
+public class MyJerseyConfig extends ResourceConfig {
 
-	public AEBJerseyConfig() 
+	public MyJerseyConfig() 
 	{	
-		packages("com.wordnik.swagger.jaxrs.json","com.assurant.inc.jersey");
+		packages("com.wordnik.swagger.jaxrs.json","org.januslabs.jersey");
 		register(ApiListingResourceJSON.class);
 		register(JerseyApiDeclarationProvider.class);
 		register(JerseyResourceListingProvider.class);

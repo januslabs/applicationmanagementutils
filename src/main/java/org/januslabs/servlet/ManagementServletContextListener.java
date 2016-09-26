@@ -1,7 +1,5 @@
 package org.januslabs.servlet;
 
-import java.util.Set;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -11,13 +9,13 @@ import javax.servlet.annotation.WebListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.selector.ContextSelector;
-import ch.qos.logback.classic.util.ContextSelectorStaticBinder;
-
 import com.jcabi.manifests.ClasspathMfs;
 import com.jcabi.manifests.Manifests;
 import com.jcabi.manifests.ServletMfs;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.selector.ContextSelector;
+import ch.qos.logback.classic.util.ContextSelectorStaticBinder;
 
 @WebListener
 public class ManagementServletContextListener implements ServletContextListener {
@@ -25,6 +23,7 @@ public class ManagementServletContextListener implements ServletContextListener 
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ManagementServletContextListener.class);
 
+	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 
 		ContextSelector selector = ContextSelectorStaticBinder.getSingleton().getContextSelector();
@@ -41,30 +40,11 @@ public class ManagementServletContextListener implements ServletContextListener 
 			LOG.warn("No context named  {}   was found.", selector.getDefaultLoggerContext().getName());
 		}
 
-		// cleaning up any other threads that might cause memory leak
-		Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-		Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
-		for (Thread t : threadArray)
-		{
-			if (t.getName().contains("com.google.inject.internal.util.$Finalizer")||
-					t.getName().contains("MongoCleaner")|| t.getName().contains("com.google.inject.internal.InjectorImpl"))
-			{
-				synchronized (t)
-				{
-					LOG.warn("Forcibly stopping thread to avoid memory leak: {}  ",	t.getName());
-					t.stop(); // don't complain, it works
-				}
-			}
-		}
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) 
-		{
-			LOG.debug(e.getMessage(), e);
-		}
+		
 
 	}
 
+	@Override
 	public void contextInitialized(ServletContextEvent event)
 	{
 		try 
@@ -74,7 +54,7 @@ public class ManagementServletContextListener implements ServletContextListener 
 			ServletContext sc = event.getServletContext();
 			Manifests.DEFAULT.append((new ServletMfs(sc)));		
 			LOG.debug("adding servlet  {} ",sc);
-	        ServletRegistration sr = sc.addServlet("ManagementServlet","com.assurant.inc.servlet.ManagementServiceServlet");	       
+	        ServletRegistration sr = sc.addServlet("ManagementServlet","org.januslabs.servlet.ManagementServiceServlet");	       
 	        sr.addMapping("/admin/*");	       
 		} catch (Exception e) {
 			// ignore

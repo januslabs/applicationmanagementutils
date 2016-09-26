@@ -48,10 +48,7 @@ public class GitRepositoryState {
 	    this.remoteOriginUrl = properties.get("git.remote.origin.url").toString();
 
 	    this.commitId = properties.get("git.commit.id").toString(); // OR properties.get("git.commit.id") depending on your configuration
-	    if(!this.commitId.isEmpty())
-	    {
-	    	this.commitId="http://msp0lnans001.etdbw.com:7990/projects/AEBC/repos/cherwell-api/commits/"+this.commitId;
-	    }
+	    
 	    this.commitIdAbbrev = properties.get("git.commit.id.abbrev").toString();
 	    this.describe = properties.get("git.commit.id.describe").toString();
 	    this.describeShort = properties.get("git.commit.id.describe-short").toString();

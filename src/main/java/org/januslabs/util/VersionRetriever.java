@@ -9,6 +9,7 @@ import com.jcabi.manifests.Manifests;
 
 public class VersionRetriever {
 
+	@SuppressWarnings("resource")
 	public String retrieveVersion()
 	{
 		Properties properties = new Properties();
@@ -28,14 +29,7 @@ public class VersionRetriever {
 				if(Manifests.exists("BuildURL")) versionTextBuilder.append( String.format("Jenkins-BuildUrl is  %s %n",Manifests.read("BuildURL")));
 				if(Manifests.exists("BuildTag")) versionTextBuilder.append( String.format("Jenkins-BuildTag is  %s %n",Manifests.read("BuildTag")));
 				
-				if(Manifests.exists("HarvestProject-Name"))
-				{
-					versionTextBuilder.append( String.format("Harvest Project-Name is  %s %n",Manifests.read("HarvestProject-Name")));					
-				}
-				if(Manifests.exists("HarvestPackage-Name"))
-				{
-					versionTextBuilder.append( String.format("Harvest Package-Name is  %s %n",Manifests.read("HarvestPackage-Name")));
-				}
+			
 				if(Manifests.exists("ReleaseNotes"))
 				{
 					versionTextBuilder.append( String.format("ReleaseNotes is  %s %n",Manifests.read("ReleaseNotes")));

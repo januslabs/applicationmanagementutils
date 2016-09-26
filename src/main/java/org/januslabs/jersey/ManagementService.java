@@ -14,7 +14,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.januslabs.servlet.ManagementSessionListener;
 import org.januslabs.util.GitRepositoryState;
 import org.januslabs.util.VersionRetriever;
 import org.slf4j.LoggerFactory;
@@ -64,27 +63,7 @@ public class ManagementService {
 		
 	}
 	
-	@GET
-	@Path(value = "/session")
-	@Produces({"text/plain"})
-	public Response getActiveSessions() throws Exception
-	{
-		LOG.debug("getActiveSessions called");
-		ManagementSessionListener sessionListener=ManagementSessionListener.getInstance(context);
-		return Response.ok().entity("Concurrent user count is  " + sessionListener.getCount()).build();
-		
-	}
 	
-	@GET
-	@Path(value = "/sessionbyregion")
-	@Produces({"text/plain"})
-	public Response getActiveSessionsByRegion() throws Exception
-	{
-		LOG.debug("getActiveSessions called");
-		ManagementSessionListener sessionListener=ManagementSessionListener.getInstance(context);
-		return Response.ok().entity( sessionListener.getCountByRegionName()).build();
-		
-	}
 	
 	@Path("/headers")
 	@GET

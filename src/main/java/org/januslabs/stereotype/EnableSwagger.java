@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 public @interface EnableSwagger {
 
-	String resourcePackage() default "com.assurant.inc.rest";
+	String resourcePackage() default "org.januslabs.rest";
 	String version() default "1.0";
 	String basePath() default "Basepath";
 	String description() default "Description";
