@@ -29,12 +29,5 @@ public class MyJerseyConfig extends ResourceConfig {
 		property(ServerProperties.TRACING_THRESHOLD,Level.SUMMARY.toString() );
 	}
 	
-	/*public void addPackages(String ... packages)
-	{
-		List<String> packageList=Arrays.asList(Tokenizer.tokenize(packages, Tokenizer.COMMON_DELIMITERS));
-		packageList.add("com.wordnik.swagger.jaxrs.json");
-		packageList.add("com.assurant.inc.jersey");
-		packages(packageList.toArray(new String[packageList.size()]));
-	}*/
 
 }
